@@ -1,0 +1,60 @@
+//
+//  main.c
+//  解密回文
+//
+//  Created by Tim on 16/5/30.
+//  Copyright © 2016年 cky. All rights reserved.
+//
+
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, const char * argv[]) {
+    
+    char a[101], s[101];
+    int i, len, next, mid, top;
+    
+    gets(a); //读入一行字符串
+    len = strlen(a); //求字符串的长度
+    mid = len/2 - 1; //求字符串的中点
+    
+    top = 0;//栈的初始化
+    //将mid前的字符依次入栈
+    for (i=0; i<=mid; i++)
+    {
+        top++;
+        s[top] = a[i];
+    }
+    
+    //判断字符串长度是奇数还是偶数,并找出需要字符匹配的起始下标
+    if(len%2 == 0)
+    {
+        next = mid + 1;
+    }
+    else
+    {
+        next = mid + 2;
+    }
+    //开始匹配
+    for (i=next; i<=len-1; i++)
+    {
+        if (a[i] != s[top])
+        {
+            break;
+        }
+        top --;
+    }
+    //如果top的值是0,说明栈内的所有字符都被一一匹配
+    if (top == 0)
+    {
+        printf("回文字符匹配成功");
+    }
+    else
+    {
+        printf("回文字符匹配失败");
+    }
+    
+    getchar();
+    getchar();
+    return 0;
+}
